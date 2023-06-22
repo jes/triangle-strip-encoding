@@ -1,6 +1,6 @@
-function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
-    let even_ys = [21,1];
-    let odd_ys = [61,41];
+function makeMeshStripSVG(data, showGrid, showLabels, hideTop, hideMid, hideBottom, showText) {
+    let even_ys = [30,10];
+    let odd_ys = [70,50];
     let stepSize = 20;
 
     // turn the message into binary
@@ -9,7 +9,7 @@ function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
     // turn the binary into y coordinates
     let ys = bin2ys(bindata, even_ys, odd_ys);
 
-    let height = 62;
+    let height = 80;
     let width = stepSize * (ys.length-1) + 1;
     let svg = '<svg width="' + width + '" height="' + height + '" xmlns="http://www.w3.org/2000/svg">';
 
@@ -26,6 +26,23 @@ function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
         svg += meshPathSVG(0, stepSize*2, evens(ys));
     if (!hideBottom)
         svg += meshPathSVG(stepSize, stepSize*2, odds(ys));
+
+    if (showLabels) {
+        let labels = [];
+        for (let i = 0; i < 2; i++) {
+            labels.push({
+                x: 0,
+                y: even_ys[i]+6,
+                text: i,
+            });
+            labels.push({
+                x: 0,
+                y: odd_ys[i]+6,
+                text: i,
+            });
+        }
+        svg += labelsSVG(labels);
+    }
 
     svg += '</svg>';
     return svg;
@@ -54,6 +71,14 @@ function gridPathSVG(xs, ys, w, h) {
 
 function lineSVG(x1, y1, x2, y2) {
     return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#ccc" />';
+}
+
+function labelsSVG(labels) {
+    let svg = '';
+    for (let l of labels) {
+        svg += '<text x="' + l.x + '" y="' + l.y + '" font-size="0.8em" fill="red">' + l.text + '</text>';
+    }
+    return svg;
 }
 
 function evens(arr) {
