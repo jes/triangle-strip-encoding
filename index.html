@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<title>Mesh Strip Encoding</title>
+</head>
+<body>
+
+<h1>Mesh Strip Encoding</h1>
+
+<div id="inputs">
+    <label for="data">Data:</label> <input type="text" id="data"><br>
+    <button id="go">Go</button>
+</div>
+
+<div id="output">
+</div>
+
+<script src="mesh-strip-encoding.js"></script>
+
+<script type="text/javascript">
+document.getElementById('go').onclick = function() {
+    let svg = makeMeshStripSVG(document.getElementById('data').value);
+    document.getElementById('output').innerHTML = svg;
+};
+</script>
+
+</body>
+</html>
