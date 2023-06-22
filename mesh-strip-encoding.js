@@ -10,7 +10,7 @@ function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
     let ys = bin2ys(bindata, even_ys, odd_ys);
 
     let height = 61;
-    let width = stepSize * ys.length + 1;
+    let width = stepSize * (ys.length-1) + 1;
     let svg = '<svg width="' + width + '" height="' + height + '" xmlns="http://www.w3.org/2000/svg">';
 
     if (showGrid) {
