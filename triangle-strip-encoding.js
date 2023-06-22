@@ -1,4 +1,4 @@
-function makeMeshStripSVG(data, showGrid, showLabels, hideTop, hideMid, hideBottom, showText) {
+function makeTriangleStripSVG(data, showGrid, showLabels, hideTop, hideMid, hideBottom, showText) {
     let even_ys = [30,10];
     let odd_ys = [70,50];
     let stepSize = 20;
@@ -21,11 +21,11 @@ function makeMeshStripSVG(data, showGrid, showLabels, hideTop, hideMid, hideBott
     }
 
     if (!hideMid)
-        svg += meshPathSVG(0, stepSize, ys);
+        svg += pathSVG(0, stepSize, ys);
     if (!hideTop)
-        svg += meshPathSVG(0, stepSize*2, evens(ys));
+        svg += pathSVG(0, stepSize*2, evens(ys));
     if (!hideBottom)
-        svg += meshPathSVG(stepSize, stepSize*2, odds(ys));
+        svg += pathSVG(stepSize, stepSize*2, odds(ys));
 
     if (showLabels) {
         let labels = [];
@@ -48,7 +48,7 @@ function makeMeshStripSVG(data, showGrid, showLabels, hideTop, hideMid, hideBott
     return svg;
 }
 
-function meshPathSVG(x, stepx, ys) {
+function pathSVG(x, stepx, ys) {
     let path = "M " + x + " " + ys[0] + "\n";
     for (let i = 1; i < ys.length; i++) {
         x += stepx;

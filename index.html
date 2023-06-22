@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-<title>Mesh Strip Encoding</title>
+<title>Triangle Strip Encoding</title>
 </head>
 <body>
 
-<h1>Mesh Strip Encoding</h1>
+<h1>Triangle Strip Encoding</h1>
 
 <div id="info">
     <p>
@@ -14,7 +14,7 @@
 <div id="inputs">
     <label for="data">Data:</label> <input type="text" id="data" value="hello" autofocus><br>
     <label for="showGrid">Show grid?</label> <input type="checkbox" id="showGrid" checked><br>
-    <label for="showLabels">Show labels?</label> <input type="checkbox" id="showLabels" checked><br>
+    <label for="showLabels">Show labels?</label> <input type="checkbox" id="showLabels"><br>
     <label for="hideTop">Hide top line?</label> <input type="checkbox" id="hideTop"><br>
     <label for="hideMid">Hide middle line?</label> <input type="checkbox" id="hideMid"><br>
     <label for="hideBottom">Hide bottom line?</label> <input type="checkbox" id="hideBottom"><br>
@@ -25,11 +25,11 @@
 <div id="output">
 </div>
 
-<script src="mesh-strip-encoding.js"></script>
+<script src="triangle-strip-encoding.js"></script>
 
 <script type="text/javascript">
 function redraw() {
-    let svg = makeMeshStripSVG(document.getElementById('data').value, document.getElementById('showGrid').checked, document.getElementById('showLabels').checked, document.getElementById('hideTop').checked, document.getElementById('hideMid').checked, document.getElementById('hideBottom').checked);
+    let svg = makeTriangleStripSVG(document.getElementById('data').value, document.getElementById('showGrid').checked, document.getElementById('showLabels').checked, document.getElementById('hideTop').checked, document.getElementById('hideMid').checked, document.getElementById('hideBottom').checked);
     document.getElementById('output').innerHTML = svg;
 }
 document.getElementById('data').onkeyup = redraw;
