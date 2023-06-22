@@ -8,8 +8,11 @@
 <h1>Mesh Strip Encoding</h1>
 
 <div id="inputs">
-    <label for="data">Data:</label> <input type="text" id="data"><br>
-    <button id="go">Go</button>
+    <label for="data">Data:</label> <input type="text" id="data" value="hello" autofocus><br>
+    <label for="showGrid">Show grid?</label> <input type="checkbox" id="showGrid"><br>
+    <label for="hideTop">Hide top line?</label> <input type="checkbox" id="hideTop"><br>
+    <label for="hideMid">Hide middle line?</label> <input type="checkbox" id="hideMid"><br>
+    <label for="hideBottom">Hide bottom line?</label> <input type="checkbox" id="hideBottom"><br>
 </div>
 
 <div id="output">
@@ -18,10 +21,17 @@
 <script src="mesh-strip-encoding.js"></script>
 
 <script type="text/javascript">
-document.getElementById('go').onclick = function() {
-    let svg = makeMeshStripSVG(document.getElementById('data').value);
+function redraw() {
+    let svg = makeMeshStripSVG(document.getElementById('data').value, document.getElementById('showGrid').checked, document.getElementById('hideTop').checked, document.getElementById('hideMid').checked, document.getElementById('hideBottom').checked);
     document.getElementById('output').innerHTML = svg;
-};
+}
+document.getElementById('data').onkeyup = redraw;
+document.getElementById('data').onchange = redraw;
+document.getElementById('showGrid').onchange = redraw;
+document.getElementById('hideTop').onchange = redraw;
+document.getElementById('hideMid').onchange = redraw;
+document.getElementById('hideBottom').onchange = redraw;
+redraw();
 </script>
 
 </body>

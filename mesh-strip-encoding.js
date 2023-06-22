@@ -1,6 +1,6 @@
-function makeMeshStripSVG(data) {
-    let even_ys = [30,10];
-    let odd_ys = [70,50];
+function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
+    let even_ys = [20,0];
+    let odd_ys = [60,40];
     let stepSize = 20;
 
     // turn the message into binary
@@ -9,15 +9,25 @@ function makeMeshStripSVG(data) {
     // turn the binary into y coordinates
     let ys = bin2ys(bindata, even_ys, odd_ys);
 
-    let height = 80;
-    let width = stepSize * ys.length;
+    let height = 61;
+    let width = stepSize * ys.length + 1;
     let svg = '<svg width="' + width + '" height="' + height + '" xmlns="http://www.w3.org/2000/svg">';
-    svg += meshPathSVG(0, stepSize, ys);
-    svg += meshPathSVG(0, stepSize*2, evens(ys));
-    svg += meshPathSVG(stepSize, stepSize*2, odds(ys));
+
+    if (showGrid) {
+        let xs = [];
+        for (let x = 0; x <= width; x += stepSize)
+            xs.push(x);
+        svg += gridPathSVG(xs, even_ys.concat(odd_ys), width, height);
+    }
+
+    if (!hideMid)
+        svg += meshPathSVG(0, stepSize, ys);
+    if (!hideTop)
+        svg += meshPathSVG(0, stepSize*2, evens(ys));
+    if (!hideBottom)
+        svg += meshPathSVG(stepSize, stepSize*2, odds(ys));
 
     svg += '</svg>';
-    console.log(svg);
     return svg;
 }
 
@@ -29,6 +39,21 @@ function meshPathSVG(x, stepx, ys) {
     }
 
     return '<path stroke="black" fill="none" d="' + path + '"/>';
+}
+
+function gridPathSVG(xs, ys, w, h) {
+    let svg = '';
+    for (let y of ys) {
+        svg += lineSVG(0, y, w, y);
+    }
+    for (let x of xs) {
+        svg += lineSVG(x, 0, x, h);
+    }
+    return svg;
+}
+
+function lineSVG(x1, y1, x2, y2) {
+    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#ccc" />';
 }
 
 function evens(arr) {
