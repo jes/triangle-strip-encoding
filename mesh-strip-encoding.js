@@ -1,6 +1,6 @@
 function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
-    let even_ys = [20,0];
-    let odd_ys = [60,40];
+    let even_ys = [21,1];
+    let odd_ys = [61,41];
     let stepSize = 20;
 
     // turn the message into binary
@@ -9,7 +9,7 @@ function makeMeshStripSVG(data, showGrid, hideTop, hideMid, hideBottom) {
     // turn the binary into y coordinates
     let ys = bin2ys(bindata, even_ys, odd_ys);
 
-    let height = 61;
+    let height = 62;
     let width = stepSize * (ys.length-1) + 1;
     let svg = '<svg width="' + width + '" height="' + height + '" xmlns="http://www.w3.org/2000/svg">';
 
